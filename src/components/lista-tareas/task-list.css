@@ -1,0 +1,56 @@
+.header{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: #2A72C7;
+    text-align: center;
+
+    .buscador{
+        
+        padding: 20px;
+        position: relative;
+        border: none;
+        padding-bottom: 40px;
+
+        .search-icon{
+            position: absolute;
+            margin-top: 7px;
+            margin-left: 10px;;
+            font-size: 20px;
+        }
+    }
+}
+
+.header h1{
+    color: white;
+    padding: 13px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.header hr{
+    justify-content: center;
+    width: 90%;
+    margin-left: 5%;
+    height: 2px;
+    background-color: white;
+}
+
+.header input{
+    font-size: 17px;
+    border: none;
+    border-radius: 7px;
+    width: 55%;
+    height: 35px;
+    text-align: center;
+}
+
+.header input::placeholder{
+    color: #292929;
+    font-size: 17px;
+}
+
+@media screen and (max-width: 650px) {
+    .header input{
+        width: 100%;
+    }
+}
+
