@@ -1,25 +1,70 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 import './task-form.css'
+import { v4 as uuidv4 } from 'uuid';
 
-const TaskForm = () => {
+const TaskForm = ({ addTask }) => {
 
+    // estado para que se muestre el formulario cuando se hace click en el botón
+    const [isOpen, setIsOpen] = useState(false)
+
+    const openModal = () => {
+        setIsOpen(true)
+    }
+
+    const closeModal = () => {
+        setIsOpen(false)
+    }
+
+    const HandleSubmitTask = (e) => {
+        e.preventDefault()
+        const title = e.target.title.value
+        const description = e.target.description.value
+        const newTask = {
+            title,
+            description,
+            id: uuidv4(),
+            createdAt: new Date().toLocaleString()
+        }
+        addTask(newTask)
+        closeModal()
+    }
     return (
 
-        <div className='formulario'>
+        <div>
+            <button onClick={openModal} className="btn-crear-tarea">Crear tarea</button>
+            {
+                isOpen && (
 
-            <label htmlFor="titulo">Titulo: </label>
-            <input type="text" id='titulo' placeholder='Ingrese el título de la tarea...' />
+                    <div className="modal">
 
-            <label htmlFor="descripcion">Descripción: </label>
-            <input type="text" id="descripcion" minLength={10} maxLength={500}/>
+                        {/* formulario de ingreso de datos para la creación de la nueva tarea */}
+                        <form onSubmit={HandleSubmitTask}>
 
-            <label htmlFor="fechaInicio">Fecha de inicio: </label>
-            <input type="date" id="fechaInicio"/>
+                            <div className="input-container">
+                                <label htmlFor="title">Título: </label>
+                                <input type="text" id="title" name="title" placeholder="Ingrese el título..." required/>
+                            </div>
 
-            <label htmlFor="fechaCierre">Fecha de cierre: </label>
-            <input type="date" id="fechaCierre"/>
 
-            <button>Crear</button>
+                            <div className="input-container descripcion">
+                                <label htmlFor="description">Descripción: </label>
+                                <textarea name="description" id="description" placeholder="Ingrese una descripción..." required></textarea>
+                            </div>
+
+                            <div className="controls-form">
+                                <button role="button" onClick={closeModal}>Cancelar</button>
+                                <button type="submit">Agregar</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+                )
+            }
+
+
         </div>
 
     )

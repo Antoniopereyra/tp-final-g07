@@ -1,19 +1,30 @@
-import React, {useState} from "react";
+import React from "react";
 import './task-list.css'
-import { IoSearch } from "react-icons/io5";
+import { TaskItem } from "../tarea/task-item";
 
-const TaskList = () => {
 
-    return(
+const TaskList = ({ tasks, deleteTask, searchString, currentTasks, handleFilterChange }) => {
+
+    return (
         <div className="header">
-            <h1 className="titulo-principal">Lista de tareas</h1>
-            <hr />
 
-            <div className="buscador">
-                <IoSearch className="search-icon"/> <input type="search" name="" placeholder="Buscar tarea..."/>
-            </div>
+
+            {
+                tasks.length == 0 && <p className="aviso">¡ Aún no has ingresado tareas !</p>
+            }
+            {
+                tasks.length != 0 && searchString != '' && currentTasks.length == 0 && <p className="inexiste">No existen tareas con ese nombre.</p>
+            }
+
+            {currentTasks.map(task => (
+                <TaskItem task={task} key={task.id} deleteTask={deleteTask}></TaskItem>
+            ))}
+
+            
+
+
         </div>
     )
 }
 
-export {TaskList}
+export { TaskList }
